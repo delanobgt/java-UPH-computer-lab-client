@@ -17,7 +17,7 @@ public class PropertiesLoader {
     static {
         try {
             input = new FileInputStream(
-                PropertiesLoader.class.getClassLoader().getResource("/properties/config.properties").getFile()
+                PropertiesLoader.class.getClassLoader().getResource("properties/config.properties").getFile()
             );
             props.load(input);
         } catch (IOException ex) {

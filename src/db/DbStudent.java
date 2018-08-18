@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Student;
+import properties.PropertiesLoader;
 
 public class DbStudent {
     
     private static final String JDBC_CLASS = "com.mysql.jdbc.Driver";
-    private static final String JDBC_URL = "jdbc:mysql://35.194.100.112:3306/students";
-    private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "psiuph2016";
+    public static final String JDBC_URL = PropertiesLoader.get("JDBC_URL_STUDENT");
+    public static final String JDBC_USERNAME = PropertiesLoader.get("JDBC_USERNAME");
+    public static final String JDBC_PASSWORD = PropertiesLoader.get("JDBC_PASSWORD");
 
     private static Connection getConnection() {
         Connection conn = null;
