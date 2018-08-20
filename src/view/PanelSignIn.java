@@ -5,15 +5,14 @@
  */
 package view;
 
-import db.DbLocalStudent;
 import db.DbWizard;
+import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import main.FrameMain;
 import model.Student;
-import properties.PropertiesLoader;
 import util.BrutalForce;
 
 /**
@@ -30,7 +29,10 @@ public class PanelSignIn extends javax.swing.JPanel {
         initComponents();
         this.parentFrame = parentFrame;
         
-        ((AbstractDocument) txtStudentID.getDocument()).setDocumentFilter(new DocumentFilter() {
+//        setNumberOnlyTxt(txtStudentID);
+    }
+    private void setNumberOnlyTxt(JTextField txtField) {
+        ((AbstractDocument) txtField.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                if (text.length() > 0 && !('0' <= text.charAt(0) && text.charAt(0) <= '9')) text = "";
@@ -43,7 +45,7 @@ public class PanelSignIn extends javax.swing.JPanel {
             }
         });
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +97,7 @@ public class PanelSignIn extends javax.swing.JPanel {
         String inputString = txtStudentID.getText().trim();
         this.txtStudentID.setText("");
         
-        if (inputString.equals(PropertiesLoader.get("EXIT_KEY"))) {
+        if (inputString.equals("#pleaseletmego")) {
             BrutalForce.stop();
             System.exit(0);
         } else {

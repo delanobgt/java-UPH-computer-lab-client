@@ -36,9 +36,11 @@ public class FrameMain extends JFrame {
     
     public FrameMain() {
         Toolkit tk = Toolkit.getDefaultToolkit();
-        final int DECK_WIDTH = (int) tk.getScreenSize().width;
-        final int DECK_HEIGHT = (int) tk.getScreenSize().height;
-        
+        final int SCREEN_WIDTH = (int) tk.getScreenSize().width;
+        final int SCREEN_HEIGHT = (int) tk.getScreenSize().height;
+        final int DECK_WIDTH = 1600;
+        final int DECK_HEIGHT = 900;
+
         mainPanel.setLayout(cardLayout);
         mainPanel.setPreferredSize(new Dimension(DECK_WIDTH, DECK_HEIGHT));
         mainPanel.setSize(DECK_WIDTH, DECK_HEIGHT);
@@ -52,10 +54,10 @@ public class FrameMain extends JFrame {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-//        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(true);
         this.pack();
-        this.setLocationRelativeTo(null);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        this.setLocationRelativeTo(null);
+        this.setLocation(-Math.abs((SCREEN_WIDTH-DECK_WIDTH))/2, -Math.abs((SCREEN_HEIGHT-DECK_HEIGHT))/2);
         
         changeSceneTo(PANEL_SIGN_IN);
     }

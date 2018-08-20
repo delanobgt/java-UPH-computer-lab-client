@@ -1,5 +1,7 @@
 package db;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,12 +66,14 @@ public class DbWizard {
                             repeat = true;
                             int newCloudID = DbCloudLabTransaction.addLabTransaction(labTransaction);
                             labTransaction.setCloudID(newCloudID);
-                        } else if (!labTransaction.getSignOut().equals("1990-10-10 00:00:00") && 
-                                labTransaction.getCloudID() != null) {
+                        } else if (!labTransaction.getSignOut().equals("1990-10-10 00:00:00")) {
                             repeat = true;
                             if (DbCloudLabTransaction.updateLabTransaction(labTransaction)) {
                                 DbLocalLabTransaction.deleteLabTransactionById(labTransaction.getId());
                             }
+                        } else if (isISODateYesterday(labTransaction.getSignIn())) {
+                            repeat = true;
+                            DbLocalLabTransaction.deleteLabTransactionById(labTransaction.getId());
                         }
                     }
                     DbLocalLabTransaction.save();
@@ -78,4 +82,22 @@ public class DbWizard {
             labTransactionSyncThread.start();
         }
     }
+    
+    private static boolean isISODateYesterday(String paramISODateString) {
+        Date today = new Date();
+        Timestamp timestamp = new Timestamp(today.getTime());
+        String todayISODateString = timestamp.toString();
+        int paramISODateValue = Integer.parseInt(
+                paramISODateString.substring(0, 4) + 
+                paramISODateString.substring(5, 7) +
+                paramISODateString.substring(8, 10)
+        );
+        int todayISODateValue = Integer.parseInt(
+                todayISODateString.substring(0, 4) + 
+                todayISODateString.substring(5, 7) +
+                todayISODateString.substring(8, 10)
+        );
+        return paramISODateValue < todayISODateValue;
+    }
 }
+

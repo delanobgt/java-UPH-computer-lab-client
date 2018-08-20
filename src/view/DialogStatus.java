@@ -98,12 +98,12 @@ public class DialogStatus extends javax.swing.JDialog {
                         this.slideDownThread.join();
                     } catch (InterruptedException ex) {Logger.getLogger(DialogStatus.class.getName()).log(Level.SEVERE, null, ex);}
                 }
-                int delay = 3;
+                int delay = 5;
                 while (this.getLocation().y > -HIDDEN_HEIGHT) {
                     if (isSlidingDown) break;
                     this.setLocation(
                             this.getLocation().x,
-                            this.getLocation().y-1);
+                            this.getLocation().y-5);
                     Utility.sleep(delay);
                 }
                 isSlidingUp = false;
@@ -116,12 +116,12 @@ public class DialogStatus extends javax.swing.JDialog {
                         this.slideUpThread.join();
                     } catch (InterruptedException ex) {Logger.getLogger(DialogStatus.class.getName()).log(Level.SEVERE, null, ex);}
                 }
-                int delay = 3;
+                int delay = 5;
                 while (this.getLocation().y < 0) {
                     if (isSlidingUp) break;
                     this.setLocation(
                             this.getLocation().x,
-                            this.getLocation().y+1);
+                            this.getLocation().y+5);
                     Utility.sleep(delay);
                 }
                 isSlidingDown = false;
