@@ -16,18 +16,16 @@ public class PropertiesLoader {
             
     static {
         try {
-            input = new FileInputStream(
-                PropertiesLoader.class.getClassLoader().getResource("properties/config.properties").getFile()
-            );
+            input = PropertiesLoader.class.getClassLoader().getResourceAsStream("properties/config.properties");
             props.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.toString());
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.toString());
                 }
             }
         }
