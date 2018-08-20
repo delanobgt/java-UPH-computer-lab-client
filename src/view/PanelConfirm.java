@@ -5,7 +5,7 @@
  */
 package view;
 
-import db.DbLabTransaction;
+import db.DbWizard;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -151,7 +151,7 @@ public class PanelConfirm extends javax.swing.JPanel {
         parentFrame.changeSceneTo(FrameMain.PANEL_LOADING);
         
         new Thread(() -> {
-            Integer transactionId = DbLabTransaction.createSignIn(student);
+            Integer transactionId = DbWizard.signIn(student);
             if (transactionId == null) {
                 parentFrame.addComponent(
                             FrameMain.PANEL_INFO, 

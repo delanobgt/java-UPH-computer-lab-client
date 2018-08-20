@@ -5,7 +5,7 @@
  */
 package view;
 
-import db.DbLabTransaction;
+import db.DbWizard;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -56,6 +56,7 @@ public class DialogStatus extends javax.swing.JDialog {
         final int SCREEN_WIDTH = (int) tk.getScreenSize().width;
         final int SCREEN_HEIGHT = (int) tk.getScreenSize().height;
         this.setLocation((SCREEN_WIDTH-getWidth())/2, 0);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         this.lblAlias.setText(Utility.getStudentAlias(student.getName()));
         this.lblStudentID.setText(student.getStudentId());
@@ -280,7 +281,7 @@ public class DialogStatus extends javax.swing.JDialog {
         
         if (this.logoutThread == null || !this.logoutThread.isAlive()) {
             this.logoutThread = new Thread(() -> {
-                boolean dbResp = DbLabTransaction.updateSignOut(this.transactionId);
+                boolean dbResp = DbWizard.signOut(this.transactionId);
                 if (!dbResp) {
                     this.lblErrorMsg.setText("Can't logout!");
                 } else {

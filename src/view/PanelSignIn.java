@@ -5,13 +5,16 @@
  */
 package view;
 
-import db.DbStudent;
+import db.DbLocalStudent;
+import db.DbWizard;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import main.FrameMain;
 import model.Student;
+import properties.PropertiesLoader;
+import util.BrutalForce;
 
 /**
  *
@@ -89,25 +92,31 @@ public class PanelSignIn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void onLoginTriggered() {
-        parentFrame.changeSceneTo(FrameMain.PANEL_LOADING);
-        String studentID = txtStudentID.getText().trim();
-        this.txtStudentID.setText("");        
+        String inputString = txtStudentID.getText().trim();
+        this.txtStudentID.setText("");
         
-        new Thread(() -> {    
-            Student student = DbStudent.getStudentByNim(studentID);
+        if (inputString.equals(PropertiesLoader.get("EXIT_KEY"))) {
+            BrutalForce.stop();
+            System.exit(0);
+        } else {
+            parentFrame.changeSceneTo(FrameMain.PANEL_LOADING);
+            String studentID = inputString;
 
-            if (student == null) {
-                parentFrame.addComponent(
-                        FrameMain.PANEL_INFO, 
-                        new PanelInfo(parentFrame));
-                parentFrame.changeSceneTo(FrameMain.PANEL_INFO);
-            } else {
-                parentFrame.addComponent(
-                        FrameMain.PANEL_CONFIRM, 
-                        new PanelConfirm(parentFrame, student));
-                parentFrame.changeSceneTo(FrameMain.PANEL_CONFIRM);
-            }        
-        }).start();
+            new Thread(() -> {    
+                Student student = DbWizard.doesStudentExist(studentID);
+                if (student == null) {
+                    parentFrame.addComponent(
+                            FrameMain.PANEL_INFO, 
+                            new PanelInfo(parentFrame));
+                    parentFrame.changeSceneTo(FrameMain.PANEL_INFO);
+                } else {
+                    parentFrame.addComponent(
+                            FrameMain.PANEL_CONFIRM, 
+                            new PanelConfirm(parentFrame, student));
+                    parentFrame.changeSceneTo(FrameMain.PANEL_CONFIRM);
+                }        
+            }).start();
+        }
     }
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed

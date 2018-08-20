@@ -2,3 +2,5 @@
 /build/
 /dist/
 /src/properties/config.properties
+lab_transaction.db
+student.db

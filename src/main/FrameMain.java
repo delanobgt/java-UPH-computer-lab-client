@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import model.Student;
+import util.BrutalForce;
 import view.DialogStatus;
 import view.PanelLoading;
 import view.PanelSignIn;
@@ -51,9 +52,10 @@ public class FrameMain extends JFrame {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
+//        this.setAlwaysOnTop(true);
         this.pack();
         this.setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         changeSceneTo(PANEL_SIGN_IN);
     }
@@ -64,9 +66,11 @@ public class FrameMain extends JFrame {
     }
     public void hideDown() {
         this.setVisible(false);
+        BrutalForce.stop();
     }
     public void showUp() {
         this.setVisible(true);
+        BrutalForce.start();
     }
     
     public void changeSceneTo(String sceneName) {
@@ -88,8 +92,11 @@ public class FrameMain extends JFrame {
     
     // program's main entry 
     public static void main(String[] args) {
+        
         SwingUtilities.invokeLater(() -> {
-            new FrameMain().setVisible(true);
+            JFrame frame = new FrameMain();
+            frame.setVisible(true);
+            BrutalForce.start();
         });
     }
     
