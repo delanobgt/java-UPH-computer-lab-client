@@ -1,7 +1,0 @@
-compiling
-
-g++ -c -I%JAVA_HOME%\include -I%JAVA_HOME%\include\win32 util_BrutalForce.cpp -o util_BrutalForce.o
-
-linking
-
-g++ -shared -o brutal_force.dll util_BrutalForce.o -Wl,--add-stdcall-alias
