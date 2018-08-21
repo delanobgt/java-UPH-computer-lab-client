@@ -3,8 +3,6 @@ package main;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import javax.swing.JFrame;
@@ -36,7 +34,9 @@ public class FrameMain extends JFrame {
     // map of name -> components
     HashMap<String, Component> componentMap = new HashMap<>();
 
-    public FrameMain() {
+    public FrameMain() {        
+        new Thread(() -> {BrutalForce.killRunningApps();}).start();
+        
         Toolkit tk = Toolkit.getDefaultToolkit();
         final int SCREEN_WIDTH = (int) tk.getScreenSize().width;
         final int SCREEN_HEIGHT = (int) tk.getScreenSize().height;

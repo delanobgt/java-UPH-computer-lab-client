@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.FrameMain;
 import model.Student;
+import util.BrutalForce;
 import util.Utility;
 
 /**
@@ -285,6 +286,7 @@ public class DialogStatus extends javax.swing.JDialog {
                 if (!dbResp) {
                     this.lblErrorMsg.setText("Can't logout!");
                 } else {
+                    new Thread(() -> {BrutalForce.killRunningApps();}).start();
                     parentFrame.changeSceneTo(FrameMain.PANEL_SIGN_IN);
                     parentFrame.showUp();
                     this.setVisible(false);
