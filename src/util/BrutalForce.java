@@ -28,6 +28,7 @@ public class BrutalForce {
 
     public static void killRunningApps() {
         String[] allowedImageNames = {
+            "MySQLWorkbench.exe",
             "taskhostw.exe",
             "fbguard.exe",
             "Memory Compression",

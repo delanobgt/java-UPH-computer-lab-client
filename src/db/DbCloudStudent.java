@@ -24,22 +24,19 @@ import properties.PropertiesLoader;
  */
 public class DbCloudStudent {
     
-    public static final String CLOUD_URL = PropertiesLoader.get("CLOUD_DB_URL_STUDENT");
-    public static final String CLOUD_USERNAME = PropertiesLoader.get("CLOUD_DB_USERNAME");
-    public static final String CLOUD_PASSWORD = PropertiesLoader.get("CLOUD_DB_PASSWORD");
-    
     private static Connection getCloudConnection() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(CLOUD_URL, CLOUD_USERNAME, CLOUD_PASSWORD);
-        } catch (SQLException ex) {
-            Logger.getLogger(DbLocalStudent.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return conn;
+        return DbCloudConnection.getConnection();
     }
     
     public static List<Student> getStudentList() {
-        final String SQL = "SELECT * FROM studentdata";
+        final String SQL = 
+                "SELECT \n" +
+                "	S.student_id AS Student_ID, \n" +
+                "    S.name AS Name, \n" +
+                "    SP.name AS Study_Program\n" +
+                "FROM students AS S\n" +
+                "	INNER JOIN study_programs AS SP\n" +
+                "		ON SP.id = S.study_program_id;";
         try (Connection conn = getCloudConnection();
              Statement stmt = conn.createStatement()) {
             // Execute SQL query

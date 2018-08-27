@@ -89,7 +89,7 @@ public class DbLocalLabTransaction {
             for (LabTransaction labTransaction : db.values()) {
                 bufferedWriter.write(String.format("%d;%s;%s;%s;%d;%s;%s", 
                             labTransaction.getId(), 
-                            labTransaction.getNim(), 
+                            labTransaction.getStudentID(), 
                             labTransaction.getSignIn(),
                             labTransaction.getSignOut(),
                             labTransaction.getPcNumber(),

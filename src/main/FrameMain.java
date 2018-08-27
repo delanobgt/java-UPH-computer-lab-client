@@ -56,7 +56,7 @@ public class FrameMain extends JFrame {
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
+//        this.setAlwaysOnTop(true);
         this.pack();
 //        this.setLocationRelativeTo(null);
         this.setLocation(-Math.abs((SCREEN_WIDTH - DECK_WIDTH)) / 2, -Math.abs((SCREEN_HEIGHT - DECK_HEIGHT)) / 2);

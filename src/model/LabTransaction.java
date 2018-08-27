@@ -12,16 +12,16 @@ package model;
 public class LabTransaction {
 
     private Integer id;
-    private final String nim;
+    private final String studentID;
     private final String signIn;
     private String signOut;
     private final Integer pcNumber;
     private final String labLocation;
     private Integer cloudID;
     
-    public LabTransaction(Integer id, String nim, String signIn, String signOut, Integer pcNumber, String labLocation, Integer cloudID) {
+    public LabTransaction(Integer id, String studentID, String signIn, String signOut, Integer pcNumber, String labLocation, Integer cloudID) {
         this.id = id;
-        this.nim = nim;
+        this.studentID = studentID;
         this.signIn = signIn;
         this.signOut = signOut;
         this.pcNumber = pcNumber;
@@ -31,7 +31,7 @@ public class LabTransaction {
     
     public LabTransaction(Student student, String signIn, Integer pcNumber, String labLocation) {
         this.id = null;
-        this.nim = student.getStudentId();
+        this.studentID = student.getStudentId();
         this.signIn = signIn;
         this.signOut = "1990-10-10 00:00:00";
         this.pcNumber = pcNumber;
@@ -43,8 +43,8 @@ public class LabTransaction {
         return id;
     }
     
-    public String getNim() {
-        return nim;
+    public String getStudentID() {
+        return studentID;
     }
 
     public String getSignIn() {
