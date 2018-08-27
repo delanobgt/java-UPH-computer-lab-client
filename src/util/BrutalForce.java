@@ -18,12 +18,23 @@ import java.util.logging.Logger;
 
 public class BrutalForce {
 
+    private static volatile boolean threadStopping = false;
+    private static Thread killingThread = null;
+    
     public static void stop() {
-
+        threadStopping = true;
     }
 
     public static void start() {
-
+        if (killingThread == null || !killingThread.isAlive()) {
+            threadStopping = false;
+            new Thread(() -> {
+                while (!threadStopping) {
+                    killRunningApps();
+                    Utility.sleep(1000);
+                }
+            }).start();
+        }
     }
 
     public static void killRunningApps() {
