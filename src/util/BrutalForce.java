@@ -111,7 +111,6 @@ public class BrutalForce {
             "ctfmon.exe",
             "fbserver.exe",
             "vmware-usbarbitrator64.exe",
-            "atom.exe",
             "SystemSettings.exe",
             "wininit.exe",
             "KMS-R@1n.exe",
@@ -138,7 +137,8 @@ public class BrutalForce {
             "jusched.exe",
             "java.exe",
             "javaw.exe",
-            "javac.exe"
+            "javac.exe",
+            "cmd.exe"
         };
         Set<String> allowedSet = new HashSet<>(Arrays.asList(allowedImageNames));
 

@@ -56,7 +56,7 @@ public class Utility {
             Path path = Paths.get(file.getAbsolutePath());
             Files.setAttribute(path, "dos:hidden", true, LinkOption.NOFOLLOW_LINKS);
         } catch (IOException ex) {
-            Logger.getLogger(DbLocalLabTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
         return file.isHidden();
     }
@@ -65,7 +65,7 @@ public class Utility {
             Path path = Paths.get(file.getAbsolutePath());
             Files.setAttribute(path, "dos:hidden", false);
         } catch (IOException ex) {
-            Logger.getLogger(DbLocalLabTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
         return file.isHidden();
     }
